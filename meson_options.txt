@@ -1,0 +1,19 @@
+# libmateui meson build options
+
+option('examples',
+  type: 'boolean',
+  value: true,
+  description: 'Build example applications'
+)
+
+option('introspection',
+  type: 'boolean',
+  value: false,
+  description: 'Build GObject introspection data'
+)
+
+option('docs',
+  type: 'boolean',
+  value: false,
+  description: 'Build documentation'
+)
