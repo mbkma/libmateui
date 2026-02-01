@@ -3,10 +3,10 @@ name: CI Build
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 # cancel already running builds of the same branch or pull request
