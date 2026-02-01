@@ -150,6 +150,10 @@ mate_ui_window_finalize(GObject *object)
     MateUiWindow *self = MATE_UI_WINDOW(object);
     MateUiWindowPrivate *priv = mate_ui_window_get_instance_private(self);
 
+    g_clear_object(&priv->menubar);
+    g_clear_object(&priv->toolbar);
+    g_clear_object(&priv->content);
+    g_clear_object(&priv->statusbar);
     g_clear_object(&priv->settings);
     g_free(priv->width_key);
     g_free(priv->height_key);
@@ -274,7 +278,14 @@ mate_ui_window_set_toolbar(MateUiWindow *window,
     if (priv->toolbar == toolbar)
         return;
 
+    if (priv->toolbar != NULL)
+        g_object_unref(priv->toolbar);
+
     priv->toolbar = toolbar;
+
+    if (priv->toolbar != NULL)
+        g_object_ref_sink(priv->toolbar);
+
     mate_ui_window_rebuild_layout(window);
 }
 
@@ -314,7 +325,14 @@ mate_ui_window_set_content(MateUiWindow *window,
     if (priv->content == content)
         return;
 
+    if (priv->content != NULL)
+        g_object_unref(priv->content);
+
     priv->content = content;
+
+    if (priv->content != NULL)
+        g_object_ref_sink(priv->content);
+
     mate_ui_window_rebuild_layout(window);
 }
 
@@ -353,7 +371,14 @@ mate_ui_window_set_statusbar(MateUiWindow *window,
     if (priv->statusbar == statusbar)
         return;
 
+    if (priv->statusbar != NULL)
+        g_object_unref(priv->statusbar);
+
     priv->statusbar = statusbar;
+
+    if (priv->statusbar != NULL)
+        g_object_ref_sink(priv->statusbar);
+
     mate_ui_window_rebuild_layout(window);
 }
 

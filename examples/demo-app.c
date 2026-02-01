@@ -91,19 +91,20 @@ static void on_inhibit_btn_clicked(GtkButton *btn, gpointer user_data);
 
 /* Application actions */
 static const GActionEntry app_actions[] = {
-    { "new",  new_action_cb,  NULL, NULL, NULL },
-    { "open", open_action_cb, NULL, NULL, NULL },
+    { "new",         new_action_cb,         NULL, NULL, NULL, { 0 } },
+    { "open",        open_action_cb,        NULL, NULL, NULL, { 0 } },
+    { "preferences", preferences_action_cb, NULL, NULL, NULL, { 0 } },
 };
 
 /* Window actions */
 static const GActionEntry win_actions[] = {
-    { "save",    save_action_cb, NULL, NULL, NULL },
-    { "save-as", save_action_cb, NULL, NULL, NULL },
-    { "undo",    NULL, NULL, NULL, NULL },
-    { "redo",    NULL, NULL, NULL, NULL },
-    { "cut",     NULL, NULL, NULL, NULL },
-    { "copy",    NULL, NULL, NULL, NULL },
-    { "paste",   NULL, NULL, NULL, NULL },
+    { "save",    save_action_cb, NULL, NULL, NULL, { 0 } },
+    { "save-as", save_action_cb, NULL, NULL, NULL, { 0 } },
+    { "undo",    NULL, NULL, NULL, NULL, { 0 } },
+    { "redo",    NULL, NULL, NULL, NULL, { 0 } },
+    { "cut",     NULL, NULL, NULL, NULL, { 0 } },
+    { "copy",    NULL, NULL, NULL, NULL, { 0 } },
+    { "paste",   NULL, NULL, NULL, NULL, { 0 } },
 };
 
 /* Session inhibitor (global for demo) */
@@ -111,7 +112,7 @@ static MateUiSessionInhibitor *inhibitor = NULL;
 
 /* Dialog button callbacks */
 static void
-on_error_btn_clicked(GtkButton *btn,
+on_error_btn_clicked(GtkButton *btn G_GNUC_UNUSED,
                       gpointer   user_data)
 {
     GtkWindow *window = GTK_WINDOW(user_data);
@@ -120,7 +121,7 @@ on_error_btn_clicked(GtkButton *btn,
 }
 
 static void
-on_warning_btn_clicked(GtkButton *btn,
+on_warning_btn_clicked(GtkButton *btn G_GNUC_UNUSED,
                         gpointer   user_data)
 {
     GtkWindow *window = GTK_WINDOW(user_data);
@@ -129,7 +130,7 @@ on_warning_btn_clicked(GtkButton *btn,
 }
 
 static void
-on_question_btn_clicked(GtkButton *btn,
+on_question_btn_clicked(GtkButton *btn G_GNUC_UNUSED,
                          gpointer   user_data)
 {
     GtkWindow *window = GTK_WINDOW(user_data);
@@ -141,7 +142,7 @@ on_question_btn_clicked(GtkButton *btn,
 }
 
 static void
-on_confirm_btn_clicked(GtkButton *btn,
+on_confirm_btn_clicked(GtkButton *btn G_GNUC_UNUSED,
                         gpointer   user_data)
 {
     GtkWindow *window = GTK_WINDOW(user_data);
@@ -178,8 +179,8 @@ on_inhibit_btn_clicked(GtkButton *btn,
 
 /* New action callback */
 static void
-new_action_cb(GSimpleAction *action,
-              GVariant      *param,
+new_action_cb(GSimpleAction *action G_GNUC_UNUSED,
+              GVariant      *param G_GNUC_UNUSED,
               gpointer       user_data)
 {
     MateUiApplication *app = MATE_UI_APPLICATION(user_data);
@@ -199,8 +200,8 @@ new_action_cb(GSimpleAction *action,
 
 /* Open action callback */
 static void
-open_action_cb(GSimpleAction *action,
-               GVariant      *param,
+open_action_cb(GSimpleAction *action G_GNUC_UNUSED,
+               GVariant      *param G_GNUC_UNUSED,
                gpointer       user_data)
 {
     GtkApplication *app = GTK_APPLICATION(user_data);
@@ -221,8 +222,8 @@ open_action_cb(GSimpleAction *action,
 
 /* Save action callback */
 static void
-save_action_cb(GSimpleAction *action,
-               GVariant      *param,
+save_action_cb(GSimpleAction *action G_GNUC_UNUSED,
+               GVariant      *param G_GNUC_UNUSED,
                gpointer       user_data)
 {
     GtkWindow *window = GTK_WINDOW(user_data);
@@ -243,8 +244,8 @@ save_action_cb(GSimpleAction *action,
 
 /* Preferences action callback */
 static void
-preferences_action_cb(GSimpleAction *action,
-                       GVariant      *param,
+preferences_action_cb(GSimpleAction *action G_GNUC_UNUSED,
+                       GVariant      *param G_GNUC_UNUSED,
                        gpointer       user_data)
 {
     GtkApplication *app = GTK_APPLICATION(user_data);
@@ -283,7 +284,7 @@ preferences_action_cb(GSimpleAction *action,
 /* Startup callback - called after GTK is initialized */
 static void
 startup_cb(GApplication *gapp,
-           gpointer      user_data)
+           gpointer      user_data G_GNUC_UNUSED)
 {
     MateUiApplication *app = MATE_UI_APPLICATION(gapp);
 
@@ -305,7 +306,7 @@ startup_cb(GApplication *gapp,
 /* Create the main window */
 static void
 activate_cb(GApplication *gapp,
-            gpointer      user_data)
+            gpointer      user_data G_GNUC_UNUSED)
 {
     MateUiApplication *app = MATE_UI_APPLICATION(gapp);
 

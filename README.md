@@ -94,8 +94,6 @@ Later, GTK4 can replace GTK3 inside libmateui:
 Apps themselves **do not need to change**.  
 This allows incremental, low-risk migration.
 
----
-
 ### How libmateui enables GTK4 migration
 
 1. **Policy vs backend**: libmateui defines “how MATE behaves,” not “how GTK behaves.”
