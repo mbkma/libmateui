@@ -16,7 +16,6 @@ requires=(
 	meson  # Used for meson build
 )
 
-# https://src.fedoraproject.org/cgit/rpms/mate-calc.git
 requires+=(
 	autoconf-archive
 	bison
@@ -33,6 +32,7 @@ requires+=(
 	mate-desktop-devel
 	mpfr-devel
 	redhat-rpm-config
+	libXScrnSaver-devel
 )
 
 infobegin "Update system"

@@ -30,6 +30,7 @@ requires+=(
 	make
 	mate-common
 	yelp-tools
+	libxss-dev
 )
 
 infobegin "Update system"

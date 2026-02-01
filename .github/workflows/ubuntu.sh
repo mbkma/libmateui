@@ -16,7 +16,6 @@ requires=(
 	meson  # Used for meson build
 )
 
-# https://git.launchpad.net/ubuntu/+source/mate-calc/tree/debian/control
 requires+=(
 	autopoint
 	bison
@@ -32,6 +31,7 @@ requires+=(
 	make
 	mate-common
 	yelp-tools
+	libxss-dev
 )
 
 infobegin "Update system"

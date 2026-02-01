@@ -17,7 +17,6 @@ requires=(
 	meson  # Used for meson build
 )
 
-# https://gitlab.archlinux.org/archlinux/packaging/packages/mate-calc
 requires+=(
 	autoconf-archive
 	gcc
@@ -32,6 +31,7 @@ requires+=(
 	mate-common
 	which
 	yelp-tools
+	libxss
 )
 
 infobegin "Update system"
