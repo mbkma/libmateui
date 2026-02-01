@@ -1,0 +1,44 @@
+#!/usr/bin/bash
+
+set -eo pipefail
+
+# Use grouped output messages
+infobegin() {
+	echo "::group::${1}"
+}
+infoend() {
+	echo "::endgroup::"
+}
+
+# Required packages on Debian
+requires=(
+	ccache # Use ccache to speed up build
+	meson  # Used for meson build
+)
+
+requires+=(
+	autopoint
+	bison
+	flex
+	libatk1.0-dev
+	libglib2.0-dev
+	libgmp-dev
+	libgtk-3-dev
+	libmpc-dev
+	libmpfr-dev
+	libxml2-dev
+	make
+	mate-common
+	yelp-tools
+	libxss-dev
+)
+
+infobegin "Update system"
+apt-get update -qq
+infoend
+
+infobegin "Install dependency packages"
+env DEBIAN_FRONTEND=noninteractive \
+	apt-get install --assume-yes \
+	${requires[@]}
+infoend
