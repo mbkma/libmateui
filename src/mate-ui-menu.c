@@ -12,6 +12,7 @@
 #include "config.h"
 #include "mate-ui-menu.h"
 
+
 /**
  * mate_ui_menu_item_new_with_action:
  * @label: The menu item label
@@ -69,21 +70,34 @@ mate_ui_menu_item_new_with_icon(const gchar *label,
     g_return_val_if_fail(action_name != NULL, NULL);
 
     GtkWidget *item = gtk_menu_item_new();
+
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_container_add(GTK_CONTAINER(item), box);
+    gtk_widget_set_margin_start(box, 0);
+    gtk_widget_set_halign(box, GTK_ALIGN_START);
 
     if (icon_name != NULL)
     {
         GtkWidget *image = gtk_image_new_from_icon_name(icon_name, GTK_ICON_SIZE_MENU);
         gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE, 0);
+        gtk_widget_set_valign(image, GTK_ALIGN_CENTER);
+        gtk_widget_set_margin_start(image, 0);
+        gtk_widget_set_margin_end(image, 8);
     }
 
     GtkWidget *lbl = gtk_label_new_with_mnemonic(label);
     gtk_label_set_xalign(GTK_LABEL(lbl), 0.0);
+    gtk_widget_set_margin_start(lbl, 0);
+    gtk_widget_set_margin_end(lbl, 0);
     gtk_box_pack_start(GTK_BOX(box), lbl, TRUE, TRUE, 0);
 
+#if GTK_CHECK_VERSION(4,0,0)
+    gtk_menu_item_set_child(GTK_MENU_ITEM(item), box);
+#else
+    gtk_container_add(GTK_CONTAINER(item), box);
+#endif
+
     gtk_actionable_set_action_name(GTK_ACTIONABLE(item), action_name);
-    gtk_widget_show_all(box);
+    gtk_widget_show_all(item);
 
     return item;
 }
@@ -106,6 +120,10 @@ mate_ui_menu_new_from_entries(const MateUiMenuEntry *entries,
     g_return_val_if_fail(entries != NULL || n_entries == 0, NULL);
 
     GtkWidget *menu = gtk_menu_new();
+#if GTK_CHECK_VERSION(4,0,0)
+#else
+    gtk_menu_set_reserve_toggle_size(GTK_MENU(menu), FALSE);
+#endif
 
     for (gsize i = 0; i < n_entries; i++)
     {
