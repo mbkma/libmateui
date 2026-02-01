@@ -45,11 +45,22 @@ endif
 # Include directories
 libmateui_inc = include_directories('.')
 
+# If XScreenSaver is found, ensure link args are added explicitly (some
+# dependency providers may expose headers without automatic link args)
+xss_link_args = []
+if xss_dep.found()
+  # Some pkg-config providers might not expose link args via the Meson
+  # dependency object; add -lXss explicitly to ensure symbols are
+  # available at link time.
+  xss_link_args = ['-lXss']
+endif
+
 # Build the shared library
 libmateui = shared_library('mateui-' + api_version,
   sources: libmateui_sources,
   dependencies: libmateui_deps,
   include_directories: [config_inc, libmateui_inc],
+  link_args: xss_link_args,
   version: mateui_version,
   soversion: mateui_major,
   install: true,
